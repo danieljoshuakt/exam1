@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JavaScript Assignment – Daniel Joshua</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:#f4f6f8;
+    margin:0;
+}
+header{
+    background:#1976d2;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+nav{
+    background:#0d47a1;
+    padding:10px;
+    text-align:center;
+}
+nav button{
+    background:#43a047;
+    color:white;
+    border:none;
+    padding:10px;
+    margin:5px;
+    border-radius:5px;
+    cursor:pointer;
+}
+nav button:hover{background:#2e7d32}
+
+.page{
+    display:none;
+    padding:20px;
+}
+.active{display:block}
+
+.task-btn, .ppt-link{
+    display:block;
+    width:300px;
+    padding:12px;
+    margin:10px 0;
+    background:#43a047;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    text-decoration:none;
+    text-align:center;
+}
+.task-btn:hover, .ppt-link:hover{background:#2e7d32}
+
+.output{
+    background:white;
+    padding:15px;
+    margin-top:15px;
+    border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Daniel Joshua</h1>
+<p>Student at RIGA Nordic University</p>
+<p>Email: danieljoshua.dj.t@gmail.com</p>
+</header>
+
+<nav>
+<button onclick="showPage('home')">Home</button>
+<button onclick="showPage('tasks')">Tasks</button>
+<button onclick="showPage('taskPage')">Task Page</button>
+<button onclick="showPage('ppt')">Presentations</button>
+</nav>
+
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+<h2>Welcome</h2>
+<p>
+This website contains 30 JavaScript tasks and my academic
+presentations created during my course.
+</p>
+</div>
+
+<!-- TASK LIST PAGE -->
+<div id="tasks" class="page">
+<h2>JavaScript Tasks</h2>
+<div id="taskButtons"></div>
+</div>
+
+<!-- TASK PAGE -->
+<div id="taskPage" class="page">
+<h2 id="taskTitle">Task</h2>
+<button onclick="runTask()">Run Task</button>
+<div class="output" id="output">Output will appear here</div>
+</div>
+
+<!-- PPT PAGE -->
+<div id="ppt" class="page">
+<h2>My Presentations</h2>
+
+<a class="ppt-link"
+href="https://docs.google.com/presentation/d/1CoixqEd4qGbNJwzznTxJ7Nf1ZcgKPe84/edit?usp=share_link&ouid=104370580637843191220&rtpof=true&sd=true"
+target="_blank">
+Odin Presentation
+</a>
+
+<a class="ppt-link"
+href="https://docs.google.com/presentation/d/1O1hC1KZptM56zs9EAPUQa2pVOElHid_f/edit?usp=share_link&ouid=104370580637843191220&rtpof=true&sd=true"
+target="_blank">
+Certificate Presentation
+</a>
+
+</div>
+
+<script>
+let currentTask=0;
+const out=document.getElementById("output");
+
+/* Navigation */
+function showPage(id){
+document.querySelectorAll(".page")
+.forEach(p=>p.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+/* Task buttons */
+let btnDiv=document.getElementById("taskButtons");
+for(let i=1;i<=30;i++){
+btnDiv.innerHTML+=
+`<button class="task-btn" onclick="openTask(${i})">
+Task ${i}</button>`;
+}
+
+/* Open task */
+function openTask(n){
+currentTask=n;
+document.getElementById("taskTitle").innerText="Task "+n;
+out.innerText="";
+showPage("taskPage");
+}
+
+/* Run tasks */
+function runTask(){
+switch(currentTask){
+
+case 1:
+out.innerText=prompt("Enter string")
+.split("").reverse().join("");
+break;
+
+case 2:
+let s2=prompt("Enter string");
+out.innerText=s2.substring(2,4);
+break;
+
+case 3:
+let s3=prompt("Enter sentence").split(" ");
+out.innerText=s3.reduce((a,b)=>a.length>b.length?a:b);
+break;
+
+case 4:
+let s4=prompt("Enter string");
+out.innerText=s4===s4.toUpperCase()?
+s4.toLowerCase():s4.toUpperCase();
+break;
+
+case 5:
+let s5=prompt("Enter string");
+out.innerText=s5.indexOf(prompt("Enter substring"));
+break;
+
+case 6:
+let s6=prompt("Enter string");
+out.innerText=
+"Words:"+s6.trim().split(/\s+/).length+
+", Characters:"+s6.length;
+break;
+
+case 7:
+out.innerText=["Apple","Banana","Mango","Orange"][2];
+break;
+
+case 8:
+let a8=prompt("Comma separated").split(",");
+out.innerText=a8[a8.length-1];
+break;
+
+case 9:
+let s9=prompt("Enter string");
+out.innerText=s9[9]||"Less than 10 chars";
+break;
+
+case 10:
+out.innerText=[10,20,30,40].join(" ");
+break;
+
+case 11:
+out.innerText=[1,2,3,4].map(x=>x*2).join(" ");
+break;
+
+case 12:
+out.innerText=[...new Set([1,2,2,3,4])].join(" ");
+break;
+
+case 13:
+let a13=[1,2,3,4,5];
+a13.splice(2,1);
+out.innerText=a13.join(" ");
+break;
+
+case 14:
+let a14=[1,2,4,5];
+a14.splice(2,0,3);
+out.innerText=a14.join(" ");
+break;
+
+case 15:
+let a=+prompt("a"), b=+prompt("b");
+let op=prompt("+ - * /");
+out.innerText=
+op==="+"?a+b:
+op==="-"?a-b:
+op==="*"?a*b:
+op==="/"?a/b:"Invalid";
+break;
+
+case 16:
+out.innerText=+prompt("a")+ +prompt("b");
+break;
+
+case 17:
+out.innerText=prompt("a")-prompt("b");
+break;
+
+case 18:
+out.innerText=prompt("a")*prompt("b");
+break;
+
+case 19:
+out.innerText=prompt("a")/prompt("b");
+break;
+
+case 20:
+alert(prompt("Mobile").length===10?"Valid":"Invalid");
+break;
+
+case 21:
+let x=prompt("First"), y=prompt("Second");
+out.innerText=
+isNaN(Number(x))||isNaN(Number(y))?
+"String case":"Numeric case";
+break;
+
+case 22:
+out.innerText=/^\d+$/.test(prompt("Input"))?
+"Only numbers":"Invalid";
+break;
+
+case 23:
+out.innerText=/^[A-Za-z]+$/.test(prompt("Input"))?
+"Only alphabets":"Invalid";
+break;
+
+case 24:
+out.innerHTML=
+"<form>Name:<input><br>Email:<input><br></form>";
+break;
+
+case 25:
+out.innerText=
+"Name:"+prompt("Name")+
+", Email:"+prompt("Email");
+break;
+
+case 26:
+out.innerText=
+/^\S+@\S+\.\S+$/.test(prompt("Email"))?
+"Valid":"Invalid";
+break;
+
+case 27:
+out.innerText=JSON.stringify(
+{name:"Rahul",age:20,gender:"Male"});
+break;
+
+case 28:
+let p={name:"Rahul",age:20,gender:"Male"};
+out.innerText=`${p.name}, ${p.age}, ${p.gender}`;
+break;
+
+case 29:
+let sec=0;
+let t=setInterval(()=>{
+out.innerText="Seconds: "+(++sec);
+if(sec===10)clearInterval(t);
+},1000);
+break;
+
+case 30:
+document.body.style.background=
+"#"+Math.floor(Math.random()*16777215)
+.toString(16).padStart(6,"0");
+break;
+}
+}
+</script>
+
+</body>
+</html>
